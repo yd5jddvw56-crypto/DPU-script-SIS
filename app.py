@@ -16,6 +16,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
+from config import OFICIO_DESCRICAO, OFICIO_NOME
 from routes.busca import router as busca_router
 from routes.calendar import router as calendar_router
 from routes.chat import router as chat_router
@@ -73,6 +74,9 @@ app.state.jinja = jinja2.Environment(
 )
 # Expoe a versao a todos os templates sem precisar passar no render() de cada rota
 app.state.jinja.globals["app_version"] = APP_VERSION
+# Nome/descricao do oficio configuraveis via .env (OFICIO_NOME, OFICIO_DESCRICAO)
+app.state.jinja.globals["oficio_nome"] = OFICIO_NOME
+app.state.jinja.globals["oficio_descricao"] = OFICIO_DESCRICAO
 
 # Mapeamento de exibicao para nomes de area (foro). Os valores armazenados em
 # metadata.json vem sem acentos (parser do SISDPU); o front-end formata para

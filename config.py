@@ -14,6 +14,11 @@ OFICIO_GERAL = Path(os.getenv(
 PAJS_DIR = OFICIO_GERAL / "PAJs"
 PECAS_FEITAS_DIR = OFICIO_GERAL / "Peças Feitas"
 
+# Nome de exibicao do oficio (sidebar + titulo da pagina). Default mantem
+# a marca original do projeto upstream.
+OFICIO_NOME = os.getenv("OFICIO_NOME", "Ofício Geral")
+OFICIO_DESCRICAO = os.getenv("OFICIO_DESCRICAO", "")
+
 # Scripts do workspace usados pelo painel
 GERAR_DOCX_SCRIPT = OFICIO_GERAL / "gerar_docx.py"
 GERAR_PECA_SCRIPT = OFICIO_GERAL / "gerar_peticao.py"
