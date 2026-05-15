@@ -11,6 +11,7 @@ import queue
 
 from config import OFICIO_GERAL, PAJS_DIR
 from services import historico
+from services.paj_service import IGNORAR as ARQUIVOS_NAO_PECAS
 from services.skills_catalog import skill_descricao, skill_valida
 import contextlib
 
@@ -424,9 +425,10 @@ def ler_elaboracao_disco(paj_norm: str) -> dict | None:
         if f.exists():
             return json.loads(f.read_text(encoding="utf-8"))
 
-        # Fallback: tem arquivo gerado na raiz?
-        IGNORAR = {"metadata.json", "eventos_tnu.json", "datajud.json", "PROMPT_MAX.md", "elaboracao.json"}
-        gerados = [x for x in pasta.iterdir() if x.is_file() and x.name not in IGNORAR]
+        # Fallback: tem arquivo gerado na raiz? (Reusa a lista canonica de
+        # paj_service pra nao desincronizar — sisdpu.txt, NOTAS.md etc. nao
+        # sao pecas geradas pela IA.)
+        gerados = [x for x in pasta.iterdir() if x.is_file() and x.name not in ARQUIVOS_NAO_PECAS]
         if gerados:
             nomes = ", ".join(sorted(x.name for x in gerados))
             return {
