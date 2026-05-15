@@ -30,3 +30,9 @@ data/
 
 # Claude Code — configuracoes locais especificas da maquina (paths reais, PAJs, etc.)
 .claude/settings.local.json
+.claude/worktrees/
+
+# Dados sensiveis de assistidos — NAO versionar (nomes, RGs, mensagens, OCRs etc.)
+PAJs/
+Peças Feitas/
+"Peças Feitas"/
